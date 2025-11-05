@@ -1,0 +1,10 @@
+services:
+  google_adk:
+    build: .
+    container_name: google_adk
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env

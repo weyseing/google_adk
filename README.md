@@ -1,2 +1,2 @@
-# google_adk
-Google Agent Development Kit (ADK)
+# Setup Guide
+- **Copy `.env.example` to `.env` & fill up values below**
