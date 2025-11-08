@@ -4,6 +4,7 @@ services:
     container_name: google_adk
     ports:
       - "8000:8000"
+      - "8001:8001"
     volumes:
       - .:/app
     env_file:
