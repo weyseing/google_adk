@@ -4,5 +4,5 @@
 # adk run
 # adk run /app/client_a2a
 
-# local runner
-python -m client_a2a_api.runner
+# adk runner
+python -m client_a2a.runner 
