@@ -1,1 +1,1 @@
-python -m remote_a2a.facts_agent --host 0.0.0.0 --port 8001
+python -m remote_a2a.facts_agent --reload
