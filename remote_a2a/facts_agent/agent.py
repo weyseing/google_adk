@@ -19,7 +19,7 @@ async def get_fact(topic: str) -> str:
 # agent
 root_agent = Agent(
     name="facts_agent",
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash",
     description="A helpful agent that provides facts about various topics.",
     tools=[get_fact],
     instruction="""You are a factual knowledge agent. 

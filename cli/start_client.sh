@@ -1,1 +1,8 @@
-adk web /app --host 0.0.0.0 --port 8000 --reload_agents
+# adk web
+# adk web /app --host 0.0.0.0 --port 8000 --reload_agents
+
+# adk run
+# adk run /app/client_a2a
+
+# local runner
+python -m client_a2a_api.runner
