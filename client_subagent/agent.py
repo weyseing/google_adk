@@ -1,4 +1,4 @@
-# client_a2a/agent.py
+# client_subagent/agent.py
 
 from google.adk.agents import Agent   
 from google.adk.agents.remote_a2a_agent import RemoteA2aAgent

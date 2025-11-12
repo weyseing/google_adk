@@ -1,4 +1,4 @@
-# client_a2a/runner.py
+# client_subagent/runner.py
 import time
 import asyncio
 from google.adk.runners import Runner
