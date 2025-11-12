@@ -1,32 +1,37 @@
 # client_tool/agent.py
+# --------------------------------------------------------------
+# Root orchestrator – uses plain google.adk.agents.Agent
+# --------------------------------------------------------------
 
 from google.adk.agents import Agent
-from google.adk.agents.remote_a2a_agent import RemoteA2aAgent
-from google.adk.tools import AgentTool  # Correct import for agent-as-tool
+from . import tools
 
-# Remote A2A agents (these become tools via AgentTool)
-fact_remote = RemoteA2aAgent(
-    name="fact_checker",
-    description="Remote agent to check facts",
-    agent_card="http://localhost:8001/.well-known/agent-card.json",
-    timeout=300.0,
-)
-
-weather_remote = RemoteA2aAgent(
-    name="weather_checker",
-    description="Remote agent to get weather information",
-    agent_card="http://localhost:8002/.well-known/agent-card.json",
-    timeout=300.0,
-)
-
-# Wrap remotes as tools (AgentTool handles invocation schema automatically)
-fact_tool = AgentTool(agent=fact_remote)
-weather_tool = AgentTool(agent=weather_remote)
-
-# Root orchestrator agent
 root_agent = Agent(
     name="agent_orchestrator",
-    model="gemini-2.0-flash",  # Use a valid model; adjust if needed
-    description="Orchestrates fact-checking and weather queries using remote A2A tools",
-    tools=[fact_tool, weather_tool],  # Pass tool instances here
+    model="gemini-2.0-flash",
+    description="Orchestrates fact-checking + weather via A2A send_a2a_message",
+    instruction="""
+You are an orchestrator that answers user questions by delegating to two remote agents:
+
+1. **check_fact** – verify any claim.
+2. **get_weather** – get weather for a city.
+
+**Steps:**
+
+1. Read the query.
+2. Call **check_fact** if a claim is present.
+3. Call **get_weather** if a city is mentioned.
+4. You may call both in parallel.
+5. After tools return, read:
+   - `tool_context.state["fact_result"]`
+   - `tool_context.state["weather_result"]`
+6. Combine into a clear answer.
+7. If "debug" is in the query, show raw tool input/output.
+
+End with: "Anything else?"
+""",
+    tools=[
+        tools.check_fact,
+        tools.get_weather,
+    ],
 )
