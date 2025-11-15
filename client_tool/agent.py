@@ -1,7 +1,4 @@
 # client_tool/agent.py
-# --------------------------------------------------------------
-# Root orchestrator – uses plain google.adk.agents.Agent
-# --------------------------------------------------------------
 
 from google.adk.agents import Agent
 from . import tools

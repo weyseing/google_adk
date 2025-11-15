@@ -1,13 +1,9 @@
 # client_tool/a2a_client.py
-# --------------------------------------------------------------
-# Minimal, standalone PaymentRemoteA2aClient – no common/ needed
-# --------------------------------------------------------------
 
 import httpx
 import logging
 import uuid
 from typing import Set
-
 from a2a import types as a2a_types
 from a2a.client.card_resolver import A2ACardResolver
 from a2a.client.client import Client, ClientConfig
@@ -16,12 +12,8 @@ from a2a.client.client_task_manager import ClientTaskManager
 
 DEFAULT_TIMEOUT = 600.0
 HTTP_EXTENSION_HEADER = "X-A2A-Extensions"
-# Change if your remote agents require extensions
-EXTENSION_URI = "http://example.com/extensions"
 
-
-class PaymentRemoteA2aClient:
-    """Wrapper identical to AP2 sample – no external imports."""
+class CustomA2AClient:
     def __init__(
         self,
         name: str,
